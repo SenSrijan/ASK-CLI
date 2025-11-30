@@ -131,10 +131,20 @@ def handle_query(
                 n=num_results or config.search.num_results
             )
             pages = gather_context(search_results, max_total_chars=8000)
+            
+            # If no content was extracted, fall back to LLM-only
+            if not pages or all(not page.text.strip() for page in pages):
+                if debug:
+                    print("No content extracted from web sources, falling back to LLM-only")
+                use_web = False
+                search_results = []
+                pages = []
         except Exception as e:
             if debug:
                 print(f"Web search failed, falling back to LLM-only: {e}")
             use_web = False
+            search_results = []
+            pages = []
     
     if debug:
         print_debug_info(search_results, pages)

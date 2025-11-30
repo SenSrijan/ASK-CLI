@@ -12,6 +12,12 @@ class GeminiClient:
         self.model = genai.GenerativeModel(model)
 
     def answer(self, system: str, user: str) -> str:
-        prompt = f"{system}\n\n{user}"
-        response = self.model.generate_content(prompt)
-        return response.text
+        try:
+            prompt = f"{system}\n\n{user}"
+            response = self.model.generate_content(prompt)
+            if hasattr(response, 'text') and response.text:
+                return response.text
+            else:
+                return "Error: No response generated from Gemini API"
+        except Exception as e:
+            return f"Error: Gemini API failed - {str(e)}"

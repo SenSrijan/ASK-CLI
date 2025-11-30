@@ -11,8 +11,7 @@ def fetch_page(url: str, timeout: int = 10) -> str:
             response = client.get(url, timeout=timeout, follow_redirects=True)
             response.raise_for_status()
             return response.text
-    except Exception as e:
-        print(f"Failed to fetch {url}: {e}")
+    except Exception:
         return ""
 
 
