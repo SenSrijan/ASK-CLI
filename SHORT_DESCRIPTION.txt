@@ -1,0 +1,1 @@
+🤖 ASK CLI - AI-powered command line Q&A tool with web search. Get instant, structured answers using Google Gemini & Groq APIs. Features: DuckDuckGo search, colorful terminal output, JSON export, configurable providers. Perfect for developers, researchers & automation workflows. Python 3.11+
